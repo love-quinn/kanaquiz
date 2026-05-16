@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --config webpack.config.js",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --open --env.mode development --host 0.0.0.0 --config webpack.config.js",
     "mobile": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --public 192.168.1.8:8080",
-    "build": "webpack --env.mode production --config webpack.config.prod.js"
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --env.mode production --config webpack.config.prod.js",
+    "vercel-build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --env.mode production --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,9 @@
     "url": "https://github.com/anzzstuff/kanaquiz/issues"
   },
   "homepage": "https://github.com/anzzstuff/kanaquiz#readme",
+  "engines": {
+    "node": "18.x"
+  },
   "browserslist": [
     ">0.25%",
     "not dead"
@@ -31,6 +35,7 @@
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
+    "cross-env": "^7.0.3",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.12.0",
