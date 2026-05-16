@@ -18,6 +18,17 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
+    // GitHub Pages runs Jekyll by default, which can drop webpack assets.
+    {
+      apply(compiler) {
+        compiler.hooks.emit.tap('AddNojekyllPlugin', (compilation) => {
+          compilation.assets['.nojekyll'] = {
+            source: () => '',
+            size: () => 0,
+          };
+        });
+      },
+    },
     new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
